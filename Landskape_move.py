@@ -87,6 +87,20 @@ def draw_needles(x, y):
     needles.draw(window)
 
 
+def animate():
+    gr.time.sleep(0.05)
+    sun.move(-5, 0)
+
+    if sun.getCenter().getX() < 0:
+        sun.move(1000, 0)
+
+    for cloud in clouds:
+        cloud.move(20, 0)
+        if cloud.getCenter().getX() > 1000:
+            cloud.move(-1000, 0)
+    return
+
+
 window = gr.GraphWin("Landscape", 1000, 500)
 
 # Рисуем небо
@@ -113,13 +127,8 @@ draw_tree()
 ##############################################
 
 while True:
-    gr.time.sleep(0.05)
-    sun.move(-5, 0)
+    animate()
 
-    if sun.getCenter().getX() < 0:
-        sun.move(1000, 0)
 
-    for cloud in clouds:
-        cloud.move(20, 0)
-        if cloud.getCenter().getX() > 1000:
-            cloud.move(-1000, 0)
+window.getMouse()
+window.close()
